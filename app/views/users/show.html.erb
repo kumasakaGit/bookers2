@@ -1,7 +1,7 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-3">
-      <%= render 'sideuser', user: @user, book: @book %>
+      <%= render 'books/sidebar', user: @user, book: @book %>
     </div>
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
@@ -19,11 +19,7 @@
           <tr>
             <td>
               <%= link_to user_path(current_user.id) do %>
-                <% if @user.image.attached? %>
-                  <%= image_tag @user.image, size: "100*100" %>
-                <% else %>
-                  <%= image_tag 'no_image', size: "100*100" %>
-                <% end %>
+                <%= image_tag book.user.get_profile_image(100, 100) %>
               <% end %>
             </td>
             <td>
@@ -33,12 +29,6 @@
             </td>
             <td>
               <%= book.body %>
-            </td>
-            <td>
-              <%= link_to "Edit", edit_book_path(book.id), class: "btn btn-sm btn-success" %>
-            </td>
-            <td>
-              <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
             </td>
           </tr>
           <% end %>
